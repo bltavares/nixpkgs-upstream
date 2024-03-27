@@ -68,7 +68,10 @@ stdenv.mkDerivation (rec {
 
     # Do not look in /usr etc. for dependencies.
     ++ lib.optional (lib.versionOlder version "5.38.0") ./no-sys-dirs-5.31.patch
-    ++ lib.optional (lib.versionAtLeast version "5.38.0") ./no-sys-dirs-5.38.0.patch
+    ++ lib.optional (lib.versionAtLeast version "5.38.0" && lib.versionOlder version "5.39.0") ./no-sys-dirs-5.38.0.patch
+    # Fix duplicated symbol identification on pkgsStatic - Already fixed in 5.39.2+
+    ++ lib.optional (lib.versionOlder version "5.39.2") ./static-stdenv-5.38.0.patch
+    ++ lib.optional (lib.versionAtLeast version "5.39.0") ./no-sys-dirs-5.39.0.patch
 
     ++ lib.optional stdenv.isSunOS ./ld-shared.patch
     ++ lib.optionals stdenv.isDarwin [ ./cpp-precomp.patch ./sw_vers.patch ]

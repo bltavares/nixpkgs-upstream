@@ -25591,10 +25591,11 @@ with pkgs;
   ### DEVELOPMENT / PERL MODULES
 
   perlInterpreters = import ../development/interpreters/perl { inherit callPackage; };
-  inherit (perlInterpreters) perl536 perl538;
+  inherit (perlInterpreters) perl536 perl538 perl539;
 
   perl536Packages = recurseIntoAttrs perl536.pkgs;
   perl538Packages = recurseIntoAttrs perl538.pkgs;
+  perl539Packages = recurseIntoAttrs perl539.pkgs;
 
   perl = perl538;
   perlPackages = perl538Packages;
